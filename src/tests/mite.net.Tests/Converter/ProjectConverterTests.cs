@@ -6,9 +6,18 @@ using NUnit.Framework;
 
 namespace mite.Tests.Converter
 {
+    using System;
+
     [TestFixture]
     public class ProjectConverterTests
     {
+        private MiteDataMapperFactory _factory;
+        [SetUp]
+        public void SetUp()
+        {
+            _factory = new MiteDataMapperFactory(new MiteConfiguration(new Uri("https://test"), null));
+        }
+
         [Test]
         public void ProjectShouldBeConvertedToXml()
         {
@@ -24,7 +33,7 @@ namespace mite.Tests.Converter
                 Name = "Test project"
             };
 
-            string xml = new ProjectConverter().Convert(project);
+            string xml = new ProjectConverter(_factory).Convert(project);
 
             XmlDocument xmlDocument = new XmlDocument();
 
@@ -53,7 +62,7 @@ namespace mite.Tests.Converter
                         </project>
                         ";
 
-            ProjectConverter projectConverter = new ProjectConverter();
+            ProjectConverter projectConverter = new ProjectConverter(_factory);
             Project project = projectConverter.Convert(input);
 
             Assert.That(project.BudgetType, Is.EqualTo(BudgetType.minutes));
@@ -77,7 +86,7 @@ namespace mite.Tests.Converter
                         </project>
                         ";
 
-            ProjectConverter projectConverter = new ProjectConverter();
+            ProjectConverter projectConverter = new ProjectConverter(_factory);
             Project project = projectConverter.Convert(input);
 
             Assert.That(project.BudgetType, Is.EqualTo(BudgetType.cents));
@@ -90,7 +99,7 @@ namespace mite.Tests.Converter
            // project.Name = "test";
             project.BudgetType = BudgetType.cents;
 
-            ProjectConverter projectConverter = new ProjectConverter();
+            ProjectConverter projectConverter = new ProjectConverter(_factory);
             string xml = projectConverter.Convert(project);
 
             XmlDocument xmlDocument = new XmlDocument();

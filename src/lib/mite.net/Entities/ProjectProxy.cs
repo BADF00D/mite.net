@@ -16,12 +16,18 @@ namespace Mite
     /// </remarks>
     public class ProjectProxy : Project
     {
+        private readonly MiteDataMapperFactory _factory;
         private bool _customerLoaded;
 
         internal object CustomerId
         {
             get;
             set;
+        }
+
+        public ProjectProxy(MiteDataMapperFactory factory)
+        {
+            _factory = factory;
         }
 
         /// <summary>
@@ -36,7 +42,7 @@ namespace Mite
                 {
                     Trace.WriteLine("Loading customer", "Mapping");
 
-                    IDataMapper<Customer> mapper = MiteDataMapperFactory.GetMapper<Customer>();
+                    IDataMapper<Customer> mapper = _factory.GetMapper<Customer>();
 
                     try
                     {

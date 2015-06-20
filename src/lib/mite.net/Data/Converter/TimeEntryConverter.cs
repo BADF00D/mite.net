@@ -14,6 +14,13 @@ namespace Mite
 {
     internal class TimeEntryConverter : IEntityConverter<TimeEntry>
     {
+        private readonly MiteDataMapperFactory _factory;
+
+        public TimeEntryConverter(MiteDataMapperFactory factory)
+        {
+            _factory = factory;
+        }
+
         public string Convert(TimeEntry item)
         {
 
@@ -70,7 +77,7 @@ namespace Mite
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(data);
 
-            TimeEntryProxy timeEntry = new TimeEntryProxy
+            TimeEntryProxy timeEntry = new TimeEntryProxy(_factory)
             {
                 Id = int.Parse(xmlDocument.SelectSingleNode("/time-entry/id").InnerText, CultureInfo.InvariantCulture),
                 CreatedOn = DateTime.Parse(xmlDocument.SelectSingleNode("/time-entry/created-at").InnerText, CultureInfo.InvariantCulture),

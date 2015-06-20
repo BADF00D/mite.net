@@ -14,9 +14,15 @@ namespace Mite
     /// </remarks>
     public class TimeEntryProxy : TimeEntry
     {
+        private readonly MiteDataMapperFactory _factory;
         private bool _userLoaded;
         private bool _serviceLoaded;
         private bool _projectLoaded;
+
+        public TimeEntryProxy(MiteDataMapperFactory factory)
+        {
+            _factory = factory;
+        }
 
         internal string ProjectId
         {
@@ -48,7 +54,7 @@ namespace Mite
             {
                 if ( !_serviceLoaded && !string.IsNullOrEmpty(ServiceId) )
                 {
-                    IDataMapper<Service> mapper = MiteDataMapperFactory.GetMapper<Service>();
+                    IDataMapper<Service> mapper = _factory.GetMapper<Service>();
                     base.Service = mapper.GetById(ServiceId);
 
                     _serviceLoaded = true;
@@ -78,7 +84,7 @@ namespace Mite
                     }
                     else
                     {
-                        IDataMapper<Project> mapper = MiteDataMapperFactory.GetMapper<Project>();
+                        IDataMapper<Project> mapper = _factory.GetMapper<Project>();
                         base.Project = mapper.GetById(ProjectId);
                     }
 
@@ -103,7 +109,7 @@ namespace Mite
             {
                 if ( !_userLoaded )
                 {
-                    IDataMapper<User> mapper = MiteDataMapperFactory.GetMapper<User>();
+                    IDataMapper<User> mapper = _factory.GetMapper<User>();
                     base.User = mapper.GetById(UserId);
 
                     _userLoaded = true;

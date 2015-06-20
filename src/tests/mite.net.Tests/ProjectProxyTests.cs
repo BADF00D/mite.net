@@ -2,9 +2,19 @@ using NUnit.Framework;
 
 namespace Mite.Tests
 {
+    using System;
+
     [TestFixture]
     public class ProjectProxyTests
     {
+        private MiteDataMapperFactory _factory;
+        [SetUp]
+        public void SetUp()
+        {
+            _factory = new MiteDataMapperFactory(new MiteConfiguration(new Uri("https://test"), string.Empty));
+        }
+
+
         [Test]
         public void ProjectShouldBeEqualToProxy()
         {
@@ -14,7 +24,7 @@ namespace Mite.Tests
                 Name = "Test"
             };
 
-            Project projectProxy = new ProjectProxy
+            Project projectProxy = new ProjectProxy(_factory)
             {
                 Name = "Test",
                 Id = 3
@@ -32,7 +42,7 @@ namespace Mite.Tests
                 Name = "Test"
             };
 
-            Project projectProxy = new ProjectProxy
+            Project projectProxy = new ProjectProxy(_factory)
             {
                 Name = "Test",
                 Id = 3
@@ -53,10 +63,10 @@ namespace Mite.Tests
         [Test]
         public void GetHashCodeShouldReturnSameValueForIdenticalObject()
         {
-            Project p1 = new ProjectProxy();
+            Project p1 = new ProjectProxy(_factory);
             p1.Id = 1;
 
-            Project p2 = new ProjectProxy();
+            Project p2 = new ProjectProxy(_factory);
             p2.Id = 1;
 
             int p1Hash = p1.GetHashCode();

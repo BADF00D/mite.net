@@ -8,6 +8,13 @@ namespace mite.Tests.Converter
     [TestFixture]
     public class TimeEntryConverterTests
     {
+        private MiteDataMapperFactory _factory;
+        [SetUp]
+        public void SetUp()
+        {
+            _factory = new MiteDataMapperFactory(new MiteConfiguration(new Uri("https://test"), null));
+        }
+
         [Test]
         public void TimeEntry_Should_Be_Converted_From_Xml_String()
         {
@@ -32,7 +39,7 @@ namespace mite.Tests.Converter
                                    <updated-at type=""datetime"">2009-02-11T18:54:45+01:00</updated-at>
                                 </time-entry>";
 
-            var timeEntry = new TimeEntryConverter().Convert(input);
+            var timeEntry = new TimeEntryConverter(_factory).Convert(input);
 
             Assert.That(timeEntry, Is.InstanceOfType(typeof(TimeEntry)));
             Assert.AreEqual(timeEntry.Date, new DateTime(2009, 2, 13));
@@ -53,7 +60,7 @@ namespace mite.Tests.Converter
                 Date = new DateTime(2013,12,3,0,0,0,DateTimeKind.Utc)
             };
 
-            var result = new TimeEntryConverter().Convert(timeEntry);
+            var result = new TimeEntryConverter(_factory).Convert(timeEntry);
 
             Assert.IsTrue(result.Contains("project-id"));
             Assert.IsTrue(result.Contains(@"<revenue>100</revenue>"));
@@ -77,7 +84,7 @@ namespace mite.Tests.Converter
                 Date = new DateTime(2013, 12, 3, 0, 0, 0, DateTimeKind.Utc)
             };
 
-            var result = new TimeEntryConverter().Convert(timeEntry);
+            var result = new TimeEntryConverter(_factory).Convert(timeEntry);
 
             Assert.IsTrue(result.Contains("project-id"));
             Assert.IsTrue(result.Contains(@"<revenue>100</revenue>"));

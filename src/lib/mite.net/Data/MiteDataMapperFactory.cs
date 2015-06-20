@@ -7,9 +7,16 @@ using System;
 
 namespace Mite
 {
-    internal sealed class MiteDataMapperFactory
+    public class MiteDataMapperFactory
     {
-        internal static IDataMapper<T> GetMapper<T>() where T : class, new()
+        private readonly MiteConfiguration _configuration;
+
+        public MiteDataMapperFactory(MiteConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        internal IDataMapper<T> GetMapper<T>() where T : class, new()
         {
             WebMapper mapper = null;
 
@@ -31,7 +38,7 @@ namespace Mite
             {
                 mapper = new ProjectMapper
                              {
-                                 Converter = new ProjectConverter()
+                                 Converter = new ProjectConverter(this)
                              };
             }
             if ( typeof(T) == typeof(Service) )
@@ -45,7 +52,7 @@ namespace Mite
             {
                 mapper = new TimeEntryMapper
                              {
-                                 Converter = new TimeEntryConverter()
+                                 Converter = new TimeEntryConverter(this)
                              };
             }
             if ( typeof(T) == typeof(Timer) )
@@ -58,7 +65,7 @@ namespace Mite
 
             if ( mapper != null )
             {
-                mapper.WebAdapter = new DefaultWebAdapter();
+                mapper.WebAdapter = new DefaultWebAdapter(_configuration);
 
                 return (IDataMapper<T>)mapper;
             }

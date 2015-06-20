@@ -18,7 +18,13 @@ namespace Mite
     /// </summary>
     internal class DefaultWebAdapter : IWebAdapter
     {
+        private readonly MiteConfiguration _configuration;
         private static string _userAgent;
+
+        public DefaultWebAdapter(MiteConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         //--------------------------------------------------------------------------
         /// <summary>
@@ -50,29 +56,29 @@ namespace Mite
             }
         }
 
-        private static HttpWebRequest CreateRequest(string url)
+        private HttpWebRequest CreateRequest(string url)
         {
-            string requestUrl = MiteConfiguration.CurrentConfiguration.Domain + url;
+            string requestUrl = _configuration.Domain + url;
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUrl);
 
-            if (MiteConfiguration.CurrentConfiguration.Proxy != null)
+            if (_configuration.Proxy != null)
             {
-                request.Proxy = MiteConfiguration.CurrentConfiguration.Proxy;
+                request.Proxy = _configuration.Proxy;
             }
 
             request.UserAgent = UserAgent;
 
-            if ( !string.IsNullOrEmpty(MiteConfiguration.CurrentConfiguration.ApiKey) )
+            if ( !string.IsNullOrEmpty(_configuration.ApiKey) )
             {
-                request.Headers.Add("X-MiteApiKey", MiteConfiguration.CurrentConfiguration.ApiKey);
+                request.Headers.Add("X-MiteApiKey", _configuration.ApiKey);
             }
             else
             {
                 request.Credentials = new NetworkCredential
                 {
-                    UserName = MiteConfiguration.CurrentConfiguration.User,
-                    Password = MiteConfiguration.CurrentConfiguration.Password
+                    UserName = _configuration.User,
+                    Password = _configuration.Password
                 };
             }
 

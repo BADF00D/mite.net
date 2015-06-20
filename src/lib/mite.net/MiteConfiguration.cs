@@ -14,12 +14,6 @@ namespace Mite
     /// </summary>
     public class MiteConfiguration
     {
-        internal static MiteConfiguration CurrentConfiguration
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Gets or sets the API key.
         /// </summary>
@@ -88,6 +82,8 @@ namespace Mite
         /// <value>The proxy.</value>
         public IWebProxy Proxy { get; set; }
 
+        public MiteDataMapperFactory Factory { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MiteConfiguration"/> class.
         /// </summary>
@@ -97,6 +93,7 @@ namespace Mite
         {
             Domain = domain;
             ApiKey = apiKey;
+            Factory = new MiteDataMapperFactory(this);
         }
 
         /// <summary>
@@ -110,6 +107,7 @@ namespace Mite
             Domain = domain;
             User = user;
             Password = password;
+            Factory = new MiteDataMapperFactory(this);
         }
 
         /// <summary>

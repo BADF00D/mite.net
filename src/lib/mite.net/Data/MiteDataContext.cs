@@ -10,13 +10,15 @@ namespace Mite
     /// </summary>
     public class MiteDataContext : BaseDataContext
     {
+        private MiteConfiguration _configuration;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MiteDataContext"/> class.
         /// </summary>
         /// <param name="miteConfiguration">The configuration of the data context.</param>
         public MiteDataContext(MiteConfiguration miteConfiguration)
         {
-            MiteConfiguration.CurrentConfiguration = miteConfiguration;
+            _configuration = miteConfiguration;
         }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace Mite
         /// </remarks>
         public MiteDataContext()
         {
-            MiteConfiguration.CurrentConfiguration = MiteConfiguration.ReadFromConfig();
+            _configuration = MiteConfiguration.ReadFromConfig();
         }
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace Mite
         /// <returns>A data mapper for the type</returns>
         protected override IDataMapper<T> GetDataMapper<T>()
         {
-            return MiteDataMapperFactory.GetMapper<T>();
+            return _configuration.Factory.GetMapper<T>();
         }
     }
 }

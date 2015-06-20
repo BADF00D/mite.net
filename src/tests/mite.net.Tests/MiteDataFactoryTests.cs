@@ -7,17 +7,25 @@ namespace Mite.Tests
     [Category("MapperFactory")]
     public class MiteDataFactoryTests
     {
+
+        private MiteDataMapperFactory _factory;
+        [SetUp]
+        public void Setup()
+        {
+            _factory = new MiteDataMapperFactory(new MiteConfiguration(new Uri("https://test"), string.Empty));
+        }
+        
         [Test]
         [ExpectedException(typeof(NotImplementedException))]
         public void ThrowExceptionForUnkownType()
         {
-            IDataMapper<object> mapper = MiteDataMapperFactory.GetMapper<object>();
+            IDataMapper<object> mapper = _factory.GetMapper<object>();
         }
 
         [Test]
         public void GetMapperForUser()
         {
-            IDataMapper<User> mapper = MiteDataMapperFactory.GetMapper<User>();
+            IDataMapper<User> mapper = _factory.GetMapper<User>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<User>),mapper);
         }
@@ -25,7 +33,7 @@ namespace Mite.Tests
         [Test]
         public void GetMapperForTimeEntry()
         {
-            IDataMapper<TimeEntry> mapper = MiteDataMapperFactory.GetMapper<TimeEntry>();
+            IDataMapper<TimeEntry> mapper = _factory.GetMapper<TimeEntry>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<TimeEntry>), mapper);
         }
@@ -33,7 +41,7 @@ namespace Mite.Tests
         [Test]
         public void GetMapperForService()
         {
-            IDataMapper<Service> mapper = MiteDataMapperFactory.GetMapper<Service>();
+            IDataMapper<Service> mapper = _factory.GetMapper<Service>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<Service>), mapper);
         }
@@ -41,7 +49,7 @@ namespace Mite.Tests
         [Test]
         public void GetMapperForProject()
         {
-            IDataMapper<Project> mapper = MiteDataMapperFactory.GetMapper<Project>();
+            IDataMapper<Project> mapper = _factory.GetMapper<Project>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<Project>), mapper);
         }
@@ -49,7 +57,7 @@ namespace Mite.Tests
         [Test]
         public void GetMapperForCustomer()
         {
-            IDataMapper<Customer> mapper = MiteDataMapperFactory.GetMapper<Customer>();
+            IDataMapper<Customer> mapper = _factory.GetMapper<Customer>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<Customer>), mapper);
         }
@@ -57,7 +65,7 @@ namespace Mite.Tests
         [Test]
         public void GetMapperForTimer()
         {
-            IDataMapper<Timer> mapper = MiteDataMapperFactory.GetMapper<Timer>();
+            IDataMapper<Timer> mapper = _factory.GetMapper<Timer>();
 
             Assert.IsInstanceOfType(typeof(IDataMapper<Timer>), mapper);
         }

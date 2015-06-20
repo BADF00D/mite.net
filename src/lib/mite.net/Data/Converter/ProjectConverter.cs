@@ -15,6 +15,13 @@ namespace Mite
 {
     internal class ProjectConverter : IEntityConverter<Project>
     {
+        private readonly MiteDataMapperFactory _factory;
+
+        public ProjectConverter(MiteDataMapperFactory factory)
+        {
+            _factory = factory;
+        }
+
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public string Convert(Project item)
         {
@@ -61,7 +68,7 @@ namespace Mite
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(data);
 
-            ProjectProxy project = new ProjectProxy();
+            ProjectProxy project = new ProjectProxy(_factory);
 
             project.Id = int.Parse(xmlDocument.SelectSingleNode("/project/id").InnerText, CultureInfo.InvariantCulture);
             project.Archived = bool.Parse(xmlDocument.SelectSingleNode("/project/archived").InnerText);
