@@ -9,6 +9,8 @@ using System.Net;
 
 namespace Mite
 {
+    using Data.Factory;
+
     /// <summary>
     /// Configuration for data context
     /// </summary>
@@ -82,7 +84,7 @@ namespace Mite
         /// <value>The proxy.</value>
         public IWebProxy Proxy { get; set; }
 
-        public MiteDataMapperFactory Factory { get; set; }
+        public IMiteDataMapperFactory Factory { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MiteConfiguration"/> class.

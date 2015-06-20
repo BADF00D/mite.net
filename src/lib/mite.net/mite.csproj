@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mite</RootNamespace>
     <AssemblyName>Mite</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>keyFile.snk</AssemblyOriginatorKeyFile>
@@ -33,9 +33,10 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET20-Debug|AnyCPU' ">
-	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -45,9 +46,10 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\NET20-Debug\Mite.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'NET20-Release|AnyCPU' ">
-	<TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\NET20-Release\</OutputPath>
@@ -56,9 +58,10 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\NET20-Release\Mite.xml</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET40CP-Release|AnyCPU'">
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <OutputPath>bin\NET40CP-Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -68,9 +71,10 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET40CP-Debug|AnyCPU'">
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <OutputPath>bin\NET40CP-Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -78,13 +82,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-	<DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  
-     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET35CP-Release|AnyCPU'">
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET35CP-Release|AnyCPU'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <OutputPath>bin\NET35CP-Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -94,31 +98,38 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NET35CP-Debug|AnyCPU'">
-	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <OutputPath>bin\NET35CP-Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>bin\NET35CP-Debug\Mite.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-	<DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Cache.cs" />
     <Compile Include="Data\Converter\CustomerConverter.cs" />
     <Compile Include="Data\Converter\ServiceConverter.cs" />
     <Compile Include="Data\Converter\TimeEntryConverter.cs" />
     <Compile Include="Data\Converter\UserConverter.cs" />
+    <Compile Include="Data\Factory\CachedMiteDataMapperFactory.cs" />
+    <Compile Include="Data\Factory\IMiteDataMapperFactory.cs" />
+    <Compile Include="Data\Factory\MiteDataMapperFactory.cs" />
+    <Compile Include="Data\Mapper\CachedMapper.cs" />
     <Compile Include="Data\Mapper\ServiceMapper.cs" />
     <Compile Include="Data\Mapper\TimerMapper.cs" />
     <Compile Include="Data\Query\Condition.cs" />
@@ -144,7 +155,6 @@
     <Compile Include="Data\IDataContext.cs" />
     <Compile Include="Data\IDataMapper.cs" />
     <Compile Include="Data\MiteDataContext.cs" />
-    <Compile Include="Data\MiteDataMapperFactory.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Data\Converter\IEntityConverter.cs" />
     <Compile Include="Data\IWebAdapter.cs" />

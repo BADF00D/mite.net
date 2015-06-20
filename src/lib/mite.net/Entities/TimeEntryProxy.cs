@@ -6,6 +6,8 @@
 
 namespace Mite
 {
+    using Data.Factory;
+
     /// <summary>
     /// Proxy for the time entry class.
     /// </summary>
@@ -14,12 +16,12 @@ namespace Mite
     /// </remarks>
     public class TimeEntryProxy : TimeEntry
     {
-        private readonly MiteDataMapperFactory _factory;
+        private readonly IMiteDataMapperFactory _factory;
         private bool _userLoaded;
         private bool _serviceLoaded;
         private bool _projectLoaded;
 
-        public TimeEntryProxy(MiteDataMapperFactory factory)
+        public TimeEntryProxy(IMiteDataMapperFactory factory)
         {
             _factory = factory;
         }

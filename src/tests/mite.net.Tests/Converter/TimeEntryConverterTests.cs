@@ -5,6 +5,8 @@ using NUnit.Framework;
 
 namespace mite.Tests.Converter
 {
+    using Mite.Data.Factory;
+
     [TestFixture]
     public class TimeEntryConverterTests
     {

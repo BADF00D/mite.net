@@ -7,6 +7,7 @@ using NUnit.Framework;
 namespace mite.Tests.Converter
 {
     using System;
+    using Mite.Data.Factory;
 
     [TestFixture]
     public class ProjectConverterTests

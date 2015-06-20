@@ -12,11 +12,13 @@ using System.Xml;
 
 namespace Mite
 {
+    using Data.Factory;
+
     internal class TimeEntryConverter : IEntityConverter<TimeEntry>
     {
-        private readonly MiteDataMapperFactory _factory;
+        private readonly IMiteDataMapperFactory _factory;
 
-        public TimeEntryConverter(MiteDataMapperFactory factory)
+        public TimeEntryConverter(IMiteDataMapperFactory factory)
         {
             _factory = factory;
         }

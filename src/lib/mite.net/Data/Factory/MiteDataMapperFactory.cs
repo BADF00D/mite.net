@@ -3,11 +3,12 @@
 // This software is licensed as Microsoft Public License (Ms-PL).
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
 
-namespace Mite
+namespace Mite.Data.Factory
 {
-    public class MiteDataMapperFactory
+    using System;
+
+    internal class MiteDataMapperFactory : IMiteDataMapperFactory
     {
         private readonly MiteConfiguration _configuration;
 
@@ -16,7 +17,7 @@ namespace Mite
             _configuration = configuration;
         }
 
-        internal IDataMapper<T> GetMapper<T>() where T : class, new()
+        public IDataMapper<T> GetMapper<T>() where T : class, new()
         {
             WebMapper mapper = null;
 

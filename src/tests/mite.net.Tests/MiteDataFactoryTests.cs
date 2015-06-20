@@ -3,6 +3,8 @@ using NUnit.Framework;
 
 namespace Mite.Tests
 {
+    using Data.Factory;
+
     [TestFixture]
     [Category("MapperFactory")]
     public class MiteDataFactoryTests

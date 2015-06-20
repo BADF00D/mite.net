@@ -3,6 +3,7 @@ using NUnit.Framework;
 namespace Mite.Tests
 {
     using System;
+    using Data.Factory;
 
     [TestFixture]
     public class ProjectProxyTests

@@ -8,6 +8,8 @@ using System.Net;
 
 namespace Mite
 {
+    using Data.Factory;
+
     /// <summary>
     /// Proxy for project class
     /// </summary>
@@ -16,7 +18,7 @@ namespace Mite
     /// </remarks>
     public class ProjectProxy : Project
     {
-        private readonly MiteDataMapperFactory _factory;
+        private readonly IMiteDataMapperFactory _factory;
         private bool _customerLoaded;
 
         internal object CustomerId
@@ -25,7 +27,7 @@ namespace Mite
             set;
         }
 
-        public ProjectProxy(MiteDataMapperFactory factory)
+        public ProjectProxy(IMiteDataMapperFactory factory)
         {
             _factory = factory;
         }

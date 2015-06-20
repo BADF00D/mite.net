@@ -13,11 +13,13 @@ using System.Xml;
 
 namespace Mite
 {
+    using Data.Factory;
+
     internal class ProjectConverter : IEntityConverter<Project>
     {
-        private readonly MiteDataMapperFactory _factory;
+        private readonly IMiteDataMapperFactory _factory;
 
-        public ProjectConverter(MiteDataMapperFactory factory)
+        public ProjectConverter(IMiteDataMapperFactory factory)
         {
             _factory = factory;
         }
