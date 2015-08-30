@@ -6,7 +6,7 @@ namespace Mite.Data
     internal class Cache<T>
     {
         private readonly TimeSpan _timeItemsShouldBeCached;
-        private Dictionary<object, ItemWithDateTimeTag<T>> _cache = new Dictionary<object, ItemWithDateTimeTag<T>>();
+        private readonly Dictionary<object, ItemWithDateTimeTag<T>> _cache = new Dictionary<object, ItemWithDateTimeTag<T>>();
 
         public Cache(TimeSpan timeItemsShouldBeCached)
         {
@@ -52,7 +52,9 @@ namespace Mite.Data
         }
 
 
+#pragma warning disable 693
         private class ItemWithDateTimeTag<T>
+#pragma warning restore 693
         {
             public DateTimeOffset AddedAt { get; private set; }
 

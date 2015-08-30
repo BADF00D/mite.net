@@ -3,10 +3,18 @@ namespace Mite.Data.Factory
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Generic data mapper that caches all values for given timespan.
+    /// </summary>
     public class CachedMiteDataMapperFactory : IMiteDataMapperFactory
     {
         private readonly Dictionary<Type, object> _mappers;
 
+        /// <summary>
+        /// Create a data mapper that caches all values for given timespan.
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="timeItemsShouldBeCached"></param>
         public CachedMiteDataMapperFactory(MiteConfiguration configuration, TimeSpan timeItemsShouldBeCached)
         {
             var adapter = new DefaultWebAdapter(configuration);
